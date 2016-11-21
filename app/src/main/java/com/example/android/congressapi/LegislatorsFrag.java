@@ -1,6 +1,8 @@
 package com.example.android.congressapi;
 
 //import android.app.Fragment;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -20,29 +22,19 @@ import java.util.Arrays;
  * Created by duanduan on 11/20/16.
  */
 public class LegislatorsFrag extends Fragment {
-    //private ArrayAdapter<String> listAdapter ;
-    //private String[] mPlanetTitles = new String[]{"a", "b", "c", "d", "e"};
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         getActivity().setTitle("Legislators");
         View view = inflater.inflate(R.layout.legislators, container, false);
-
-        //generate list by states
-        /*ListView mDrawerList  = (ListView) view.findViewById(R.id.legislatorsStates);
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars","Jupiter", "Saturn", "Uranus", "Neptune"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll(Arrays.asList(planets));
-        listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
-        mDrawerList.setAdapter(listAdapter);*/
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("By States"));
+        tabLayout.addTab(tabLayout.newTab().setText("House"));
+        tabLayout.addTab(tabLayout.newTab().setText("Senate"));
+        tabLayout.setTabTextColors (Color.LTGRAY, Color.DKGRAY);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
+        tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
                 (getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
@@ -69,25 +61,47 @@ public class LegislatorsFrag extends Fragment {
     }
 
     public static class TabFragment1 extends Fragment {
+        private ArrayAdapter<String> listAdapter ;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.legislators_by_states, container, false);
+            View legislatorsByStateView = inflater.inflate(R.layout.legislators_by_states, container, false);
+            ListView mDrawerList  = (ListView) legislatorsByStateView.findViewById(R.id.legislatorsStates);
+            String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars","Jupiter", "Saturn", "Uranus", "Neptune"};
+            ArrayList<String> planetList = new ArrayList<String>();
+            planetList.addAll(Arrays.asList(planets));
+            listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            mDrawerList.setAdapter(listAdapter);
+            return legislatorsByStateView;
         }
     }
 
     public static class TabFragment2 extends Fragment {
-
+        private ArrayAdapter<String> listAdapter ;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.legislators_by_house, container, false);
+            View legislatorsByHouseView = inflater.inflate(R.layout.legislators_by_house, container, false);
+            ListView mDrawerList  = (ListView) legislatorsByHouseView.findViewById(R.id.legislatorsHouse);
+            String[] planets = new String[] { "Mercury_house", "Venus_house", "Earth_house", "Mars_house","Jupiter_house", "Saturn_house", "Uranus_house", "Neptune_house"};
+            ArrayList<String> planetList = new ArrayList<String>();
+            planetList.addAll(Arrays.asList(planets));
+            listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            mDrawerList.setAdapter(listAdapter);
+            return legislatorsByHouseView;
         }
     }
 
     public static class TabFragment3 extends Fragment {
-
+        private ArrayAdapter<String> listAdapter ;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.legislators_by_senate, container, false);
+            View legislatorsBySenateView = inflater.inflate(R.layout.legislators_by_senate, container, false);
+            ListView mDrawerList  = (ListView) legislatorsBySenateView.findViewById(R.id.legislatorsSenate);
+            String[] planets = new String[] { "Mercury_house", "Venus_senate", "Earth_senate", "Mars","Jupiter", "Saturn", "Uranus", "Neptune"};
+            ArrayList<String> planetList = new ArrayList<String>();
+            planetList.addAll(Arrays.asList(planets));
+            listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            mDrawerList.setAdapter(listAdapter);
+            return legislatorsBySenateView;
         }
     }
 
