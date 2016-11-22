@@ -61,45 +61,54 @@ public class LegislatorsFrag extends Fragment {
     }
 
     public static class TabFragment1 extends Fragment {
-        private ArrayAdapter<String> listAdapter ;
+        //private ArrayAdapter<String> listAdapter ;
+        private LegislatorAdapter listAdapter ;
+        public static int [] prgmImages={R.drawable.bills,R.drawable.legislators,R.drawable.speaker};
+        public static String[] planets = new String[] { "Mercury_house", "Venus_senate", "Earth_senate"};
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View legislatorsByStateView = inflater.inflate(R.layout.legislators_by_states, container, false);
             ListView mDrawerList  = (ListView) legislatorsByStateView.findViewById(R.id.legislatorsStates);
-            String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars","Jupiter", "Saturn", "Uranus", "Neptune"};
+            //String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars","Jupiter", "Saturn", "Uranus", "Neptune"};
             ArrayList<String> planetList = new ArrayList<String>();
             planetList.addAll(Arrays.asList(planets));
-            listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
             mDrawerList.setAdapter(listAdapter);
             return legislatorsByStateView;
         }
     }
 
     public static class TabFragment2 extends Fragment {
-        private ArrayAdapter<String> listAdapter ;
+        //private ArrayAdapter<String> listAdapter ;
+        private LegislatorAdapter listAdapter ;
+        public static int [] prgmImages={R.drawable.bills,R.drawable.legislators,R.drawable.speaker};
+        public static String[] planets = new String[] { "Mercury_house", "Venus_senate", "Earth_senate"};
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View legislatorsByHouseView = inflater.inflate(R.layout.legislators_by_house, container, false);
             ListView mDrawerList  = (ListView) legislatorsByHouseView.findViewById(R.id.legislatorsHouse);
-            String[] planets = new String[] { "Mercury_house", "Venus_house", "Earth_house", "Mars_house","Jupiter_house", "Saturn_house", "Uranus_house", "Neptune_house"};
             ArrayList<String> planetList = new ArrayList<String>();
             planetList.addAll(Arrays.asList(planets));
-            listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
             mDrawerList.setAdapter(listAdapter);
             return legislatorsByHouseView;
         }
     }
 
     public static class TabFragment3 extends Fragment {
-        private ArrayAdapter<String> listAdapter ;
+        private LegislatorAdapter listAdapter ;
+        public static int [] prgmImages={R.drawable.bills,R.drawable.legislators,R.drawable.speaker};
+        public static String[] planets = new String[] { "Mercury_house", "Venus_senate", "Earth_senate"};
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View legislatorsBySenateView = inflater.inflate(R.layout.legislators_by_senate, container, false);
             ListView mDrawerList  = (ListView) legislatorsBySenateView.findViewById(R.id.legislatorsSenate);
-            String[] planets = new String[] { "Mercury_house", "Venus_senate", "Earth_senate", "Mars","Jupiter", "Saturn", "Uranus", "Neptune"};
             ArrayList<String> planetList = new ArrayList<String>();
             planetList.addAll(Arrays.asList(planets));
-            listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
+            listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
             mDrawerList.setAdapter(listAdapter);
             return legislatorsBySenateView;
         }
