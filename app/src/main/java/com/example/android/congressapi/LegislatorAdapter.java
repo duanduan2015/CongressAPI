@@ -1,6 +1,7 @@
 package com.example.android.congressapi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,8 +19,10 @@ public class LegislatorAdapter extends BaseAdapter{
     Context context;
     int [] src;
     private static LayoutInflater inflater=null;
+    Activity main;
     public LegislatorAdapter(Activity mainActivity, String[] textsList, int[] imageSrc) {
         // TODO Auto-generated constructor stub
+        main = mainActivity;
         texts = textsList;
         context = mainActivity;
         this.src = imageSrc;
@@ -54,19 +57,23 @@ public class LegislatorAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         Holder holder = new Holder();
-        View rowView;
+        final View rowView;
         rowView = inflater.inflate(R.layout.legislators_item, null);
-        holder.text=(TextView) rowView.findViewById(R.id.rowTextView);
-        holder.image=(ImageView) rowView.findViewById(R.id.imageView1);
+        holder.text = (TextView) rowView.findViewById(R.id.rowTextView);
+        holder.image = (ImageView) rowView.findViewById(R.id.imageView1);
         holder.text.setText(texts[position]);
         holder.image.setImageResource(src[position]);
-        rowView.setOnClickListener(new OnClickListener() {
+        holder.button = (ImageButton) rowView.findViewById(R.id.details_button);
+        holder.button.setOnClickListener(new OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                //Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_LONG).show();
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(main, DisplayLegislatorsDetails.class);
+                main.startActivity(intent);
             }
         });
+
         return rowView;
     }
 

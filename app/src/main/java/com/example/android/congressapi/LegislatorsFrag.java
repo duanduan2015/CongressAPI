@@ -1,19 +1,27 @@
 package com.example.android.congressapi;
 
 //import android.app.Fragment;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +68,7 @@ public class LegislatorsFrag extends Fragment {
         return view;
     }
 
+
     public static class TabFragment1 extends Fragment {
         //private ArrayAdapter<String> listAdapter ;
         private LegislatorAdapter listAdapter ;
@@ -75,6 +84,7 @@ public class LegislatorsFrag extends Fragment {
             //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
             listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
             mDrawerList.setAdapter(listAdapter);
+
             return legislatorsByStateView;
         }
     }
