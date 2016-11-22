@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
-        android:background="@android:color/white"/>
+        android:divider="#A4A4A4"
+        android:dividerHeight="1dp"/>
 </LinearLayout>
