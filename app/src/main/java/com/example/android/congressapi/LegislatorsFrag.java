@@ -43,11 +43,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.microedition.khronos.opengles.GL;
+
 /**
  * Created by duanduan on 11/20/16.
  */
 public class LegislatorsFrag extends Fragment {
-    private JSONObject legislators;
+
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -82,73 +84,39 @@ public class LegislatorsFrag extends Fragment {
 
             }
         });
-        String[] urls = new String[3];
-        urls[0] = "http://homework8-148505.appspot.com/main.php?query=legislators";
-        GetJasonData getter = new GetJasonData();
-        getter.doInBackground(urls);
-        //getter.onPostExecute(legislators);
-        /*JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, urls[0], null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        legislators = response;
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
-
-        // Access the RequestQueue through your singleton class.
-        MySingleton.getInstance(getContext()).addToRequestQueue(jsObjRequest);*/
         return view;
     }
-    private class GetJasonData extends AsyncTask<String, Integer, Long> {
-        protected Long doInBackground(String[] urls) {
-            int count = urls.length;
-            long totalSize = 0;
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, urls[0], null, new Response.Listener<JSONObject>() {
 
-                        @Override
-                        public void onResponse(JSONObject response) {
-                           legislators = response;
-                            Log.i("data", legislators.toString());
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // TODO Auto-generated method stub
-
-                        }
-                    });
-
-            // Access the RequestQueue through your singleton class.
-            MySingleton.getInstance(getContext()).addToRequestQueue(jsObjRequest);
-            return totalSize;
-        }
-    }
 
     public static class TabFragment1 extends Fragment {
         //private ArrayAdapter<String> listAdapter ;
         private LegislatorAdapter listAdapter ;
-        public static int [] prgmImages={R.drawable.bills,R.drawable.legislators,R.drawable.speaker};
-        public static String[] planets = new String[] { "Mercury_house", "Venus_senate", "Earth_senate"};
+        //public static String [] imageUrls = GlobalData.imgUrls;
+        //public static String[] names = GlobalData.names;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View legislatorsByStateView = inflater.inflate(R.layout.legislators_by_states, container, false);
             ListView mDrawerList  = (ListView) legislatorsByStateView.findViewById(R.id.legislatorsStates);
-            //String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars","Jupiter", "Saturn", "Uranus", "Neptune"};
-            ArrayList<String> planetList = new ArrayList<String>();
-            planetList.addAll(Arrays.asList(planets));
-            //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
-            listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.names, GlobalData.imgUrls, GlobalData.labels);
             mDrawerList.setAdapter(listAdapter);
-
             return legislatorsByStateView;
+        }
+
+        private static String[] getImgUrls() {
+            int num = GlobalData.legislators.length;
+            String[] urls = new String[num];
+            for (int i = 0; i < num; i++) {
+                urls[i] = GlobalData.legislators[i].imgUrl;
+            }
+            return urls;
+         }
+        private static String[] getNames() {
+            int num = GlobalData.legislators.length;
+            String[] names = new String[num];
+            for (int i = 0; i < num; i++) {
+                names[i] = GlobalData.legislators[i].name;
+            }
+            return names;
         }
     }
 
@@ -164,7 +132,7 @@ public class LegislatorsFrag extends Fragment {
             ArrayList<String> planetList = new ArrayList<String>();
             planetList.addAll(Arrays.asList(planets));
             //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
-            listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
+            //listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
             mDrawerList.setAdapter(listAdapter);
             return legislatorsByHouseView;
         }
@@ -181,7 +149,7 @@ public class LegislatorsFrag extends Fragment {
             ArrayList<String> planetList = new ArrayList<String>();
             planetList.addAll(Arrays.asList(planets));
             //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
-            listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
+            //listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
             mDrawerList.setAdapter(listAdapter);
             return legislatorsBySenateView;
         }
