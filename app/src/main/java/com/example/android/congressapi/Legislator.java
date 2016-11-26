@@ -5,6 +5,10 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by duanduan on 11/22/16.
  */
@@ -33,6 +37,7 @@ public class Legislator {
      public String imgUrl = "https://theunitedstates.io/images/congress/original/";
      public String name;
      public String label;
+    public long progress;
     public Legislator(JSONObject singleLegislator) {
         jsonData = singleLegislator;
     }
@@ -64,5 +69,17 @@ public class Legislator {
         imgUrl = imgUrl + bioguide_id + ".jpg";
         name = title + ". " + last_name + ", " + first_name;
         label = "(" + party + ")" + state_name + " - " + "District" + " " + district;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        Date startTermDate = new Date();
+        Date endTermDate = new Date();
+        Calendar c = Calendar.getInstance();
+        long seconds = c.getTimeInMillis();
+        try {
+            startTermDate = dateFormat.parse(term_start);
+            endTermDate = dateFormat.parse(term_end);
+        } catch (Exception e) {
+
+        }
+        progress = (seconds - startTermDate.getTime()) * 100 / (endTermDate.getTime() - startTermDate.getTime());
     }
 }

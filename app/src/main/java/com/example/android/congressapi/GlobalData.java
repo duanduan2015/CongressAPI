@@ -13,6 +13,7 @@ import org.json.JSONObject;
 public class GlobalData {
     public static JSONObject legislatorsJason;
     public static Legislator[] legislators;
+    public static int legislatorIndex;
     public static String[] imgUrls;
     public static String[] names;
     public static String[] labels;

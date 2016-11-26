@@ -93,6 +93,7 @@ public class LegislatorAdapter extends BaseAdapter{
             @Override
             public void onClick(View v)
             {
+                GlobalData.legislatorIndex = position;
                 Intent intent = new Intent(main, DisplayLegislatorsDetails.class);
                 main.startActivity(intent);
             }
