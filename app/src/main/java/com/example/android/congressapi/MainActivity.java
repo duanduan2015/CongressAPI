@@ -1,6 +1,7 @@
 package com.example.android.congressapi;
 
 //import android.app.FragmentManager;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +25,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
+
+import java.net.URL;
 //import android.app.Fragment;
 
 public class MainActivity extends AppCompatActivity
@@ -52,7 +55,8 @@ public class MainActivity extends AppCompatActivity
 
         String[] urls = new String[3];
         urls[0] = "http://homework8-148505.appspot.com/main.php?query=legislators";
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+        new GetJsonData().execute(urls);
+        /*JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, urls[0], null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -75,7 +79,38 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
         // Access the RequestQueue through your singleton class.
-        MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);
+        MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);*/
+    }
+
+    private class GetJsonData extends AsyncTask<String, Integer, Long> {
+        protected Long doInBackground(String[] urls) {
+            long totalSize = 0;
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                    (Request.Method.GET, urls[0], null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            GlobalData.legislatorsJason = response;
+                            GlobalData.getLegislators();
+                            GlobalData.getImgUrls();
+                            GlobalData.getNames();
+                            GlobalData.getLabels();
+                            Fragment fr = new LegislatorsFrag();
+                            FragmentManager fm = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_place, fr);
+                            fragmentTransaction.commit();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
+            // Access the RequestQueue through your singleton class.
+            MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsObjRequest);
+            return totalSize;
+        }
     }
 
     @Override

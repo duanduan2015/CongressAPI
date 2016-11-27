@@ -101,23 +101,6 @@ public class LegislatorsFrag extends Fragment {
             mDrawerList.setAdapter(listAdapter);
             return legislatorsByStateView;
         }
-
-        private static String[] getImgUrls() {
-            int num = GlobalData.legislators.length;
-            String[] urls = new String[num];
-            for (int i = 0; i < num; i++) {
-                urls[i] = GlobalData.legislators[i].imgUrl;
-            }
-            return urls;
-         }
-        private static String[] getNames() {
-            int num = GlobalData.legislators.length;
-            String[] names = new String[num];
-            for (int i = 0; i < num; i++) {
-                names[i] = GlobalData.legislators[i].name;
-            }
-            return names;
-        }
     }
 
     public static class TabFragment2 extends Fragment {

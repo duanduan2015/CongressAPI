@@ -1,16 +1,29 @@
 package com.example.android.congressapi;
 
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Parcelable;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.FitWindowsLinearLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.Layout;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -19,6 +32,7 @@ import android.support.v7.widget.Toolbar;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -35,27 +49,90 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Legislator Info");
-
-        Intent intent = getIntent();
-        Legislator legislator = GlobalData.legislators[GlobalData.legislatorIndex];
-        ImageLoader mImageLoader;
-        NetworkImageView image = (NetworkImageView) findViewById(R.id.imageInDetails);
-        mImageLoader = MySingleton.getInstance(this).getImageLoader();
-        image.setImageUrl(legislator.imgUrl, mImageLoader);
-        ViewGroup party = (ViewGroup) findViewById(R.id.party);
-        ImageView partyLogo = (ImageView) party.findViewById(R.id.partyLogo);
-        TextView partyName = (TextView) party.findViewById(R.id.partyName);
-        if (legislator.party.equals("R")) {
-            partyLogo.setImageResource(R.drawable.republican);
-            partyName.setText("Republican");
-        } else if (legislator.party.equals("D")) {
-            partyLogo.setImageResource(R.drawable.democrat);
-            partyName.setText("Democrat");
-        }
-        View table = findViewById(R.id.legislatorTable);
-        addTableRows(table, legislator);
+        //Intent intent = getIntent();
+        new PopulateTable().execute();
+        //addTableRows();
     }
-    private void addTableRows(View t, Legislator l) {
+    private class PopulateTable extends AsyncTask<String, Integer, Long> {
+        protected Long doInBackground(String[] views) {
+            int count = views.length;
+            long totalSize = 0;
+            addTableRows();
+            return totalSize;
+        }
+    }
+
+    private void addTableRows() {
+        runOnUiThread(new Runnable(){
+            public void run() {
+                Legislator l = GlobalData.legislators[GlobalData.legislatorIndex];
+                ViewGroup content_view = (ViewGroup) getLayoutInflater().inflate(R.layout.legislator_details_content, null);
+                ViewGroup views = (ViewGroup) findViewById(R.id.display_legislators_details);
+                NetworkImageView image = (NetworkImageView) content_view.findViewById(R.id.imageInDetails);
+                ImageLoader mImageLoader;
+                mImageLoader = MySingleton.getInstance(getApplicationContext()).getImageLoader();
+                image.setImageUrl(l.imgUrl, mImageLoader);
+
+                TextView partyName = (TextView) content_view.findViewById(R.id.partyName);
+                ImageView partyLogo = (ImageView) content_view.findViewById(R.id.partyLogo);
+                if (l.party.equals("R")) {
+                    partyLogo.setImageResource(R.drawable.republican);
+                    partyName.setText("Republican");
+                } else if (l.party.equals("D")) {
+                    partyLogo.setImageResource(R.drawable.democrat);
+                    partyName.setText("Democrat");
+                }
+                //If there are stories, add them to the table
+                TextView nameRow = (TextView) content_view.findViewById(R.id.legislatorTable_name);
+                String name = l.title + ". " + l.last_name + ", " + l.first_name;
+                nameRow.setText(name);
+                TextView emailRow = (TextView) content_view.findViewById(R.id.legislatorTable_email);
+                String email = l.oc_email;
+                emailRow.setText(email);
+                TextView chamberRow = (TextView) content_view.findViewById(R.id.legislatorTable_chamber);
+                String chamber = l.chamber.substring(0,1).toUpperCase() + l.chamber.substring(1).toLowerCase();
+                chamberRow.setText(chamber);
+                TextView contactRow = (TextView) content_view.findViewById(R.id.legislatorTable_contact);
+                String contact = l.phone;
+                contactRow.setText(contact);
+                TextView startTermRow = (TextView) content_view.findViewById(R.id.legislatorTable_start_term);
+                String start_term = l.term_start;
+                TextView endTermRow = (TextView) content_view.findViewById(R.id.legislatorTable_end_term);
+                String end_term = l.term_end;
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                Date startTermDate = new Date();
+                Date endTermDate = new Date();
+                Date birthdayDate = new Date();
+                try {
+                    startTermDate = dateFormat.parse(l.term_start);
+                    endTermDate = dateFormat.parse(l.term_end);
+                    birthdayDate = dateFormat.parse(l.birthday);
+                } catch (Exception e) {
+
+                }
+                DateFormat format = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
+                start_term = format.format(startTermDate);
+                end_term = format.format(endTermDate);
+                startTermRow.setText(start_term);
+                endTermRow.setText(end_term);
+                ProgressBar progressBar = (ProgressBar) content_view.findViewById(R.id.legislatorTable_progressbar);
+                long progress = l.progress;
+                progressBar.setProgress((int)progress);
+                TextView progress_percent = (TextView) content_view.findViewById(R.id.legislatorTable_progressbar_percent);
+                progress_percent.setText(Integer.toString((int)progress) + "%");
+                TextView office = (TextView) content_view.findViewById(R.id.legislatorTable_office);
+                office.setText(l.office);
+                TextView state = (TextView) content_view.findViewById(R.id.legislatorTable_state);
+                state.setText(l.state);
+                TextView fax = (TextView) content_view.findViewById(R.id.legislatorTable_fax);
+                fax.setText(l.fax);
+                TextView birthday = (TextView) content_view.findViewById(R.id.legislatorTable_birthday);
+                birthday.setText(format.format(birthdayDate));
+                views.addView(content_view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            }
+        });
+    }
+    /*private void addTableRows(View t, Legislator l) {
         TextView nameRow = (TextView) t.findViewById(R.id.legislatorTable_name);
         String name = l.title + ". " + l.last_name + ", " + l.first_name;
         nameRow.setText(name);
@@ -93,7 +170,7 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
         progressBar.setProgress((int)progress);
         TextView progress_percent = (TextView) findViewById(R.id.legislatorTable_progressbar_percent);
         progress_percent.setText(Integer.toString((int)progress) + "%");
-    }
+    }*/
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
