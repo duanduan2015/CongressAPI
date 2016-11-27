@@ -1,6 +1,7 @@
 package com.example.android.congressapi;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -128,49 +130,59 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 fax.setText(l.fax);
                 TextView birthday = (TextView) content_view.findViewById(R.id.legislatorTable_birthday);
                 birthday.setText(format.format(birthdayDate));
+                ImageButton favorite = (ImageButton) content_view.findViewById(R.id.favorite);
+                favorite.setBackgroundResource(R.drawable.star_default);
+                favorite.setOnClickListener(new ImageButton.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean isFavorite = GlobalData.legislators[GlobalData.legislatorIndex].favorite;
+                        if (isFavorite) {
+                            GlobalData.legislators[GlobalData.legislatorIndex].favorite = false;
+                            v.setBackgroundResource(R.drawable.star_default);
+                        } else {
+                            GlobalData.legislators[GlobalData.legislatorIndex].favorite = true;
+                            v.setBackgroundResource(R.drawable.star_pressed);
+                        }
+                    }
+                });
+                ImageView facebook = (ImageView) content_view.findViewById(R.id.facebook);
+                facebook.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String url = "https://m.facebook.com/" + GlobalData.legislators[GlobalData.legislatorIndex].facebook_id;
+                        //Log.i("url", url);
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                });
+                ImageView twitter = (ImageView) content_view.findViewById(R.id.twitter);
+                twitter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String url = "https://mobile.twitter.com/" + GlobalData.legislators[GlobalData.legislatorIndex].twitter_id;
+                        //Log.i("url", url);
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                });
+                ImageView world = (ImageView) content_view.findViewById(R.id.world);
+                world.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String url = GlobalData.legislators[GlobalData.legislatorIndex].website;
+                        //Log.i("url", url);
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                });
                 views.addView(content_view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             }
         });
     }
-    /*private void addTableRows(View t, Legislator l) {
-        TextView nameRow = (TextView) t.findViewById(R.id.legislatorTable_name);
-        String name = l.title + ". " + l.last_name + ", " + l.first_name;
-        nameRow.setText(name);
-        TextView emailRow = (TextView) t.findViewById(R.id.legislatorTable_email);
-        String email = l.oc_email;
-        emailRow.setText(email);
-        TextView chamberRow = (TextView) t.findViewById(R.id.legislatorTable_chamber);
-        String chamber = l.chamber.substring(0,1).toUpperCase() + l.chamber.substring(1).toLowerCase();
-        chamberRow.setText(chamber);
-        TextView contactRow = (TextView) t.findViewById(R.id.legislatorTable_contact);
-        String contact = l.phone;
-        contactRow.setText(contact);
-        TextView startTermRow = (TextView) t.findViewById(R.id.legislatorTable_start_term);
-        String start_term = l.term_start;
-        TextView endTermRow = (TextView) t.findViewById(R.id.legislatorTable_end_term);
-        String end_term = l.term_end;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        Date startTermDate = new Date();
-        Date endTermDate = new Date();
-        Date birthday = new Date();
-        try {
-            startTermDate = dateFormat.parse(l.term_start);
-            endTermDate = dateFormat.parse(l.term_end);
-            birthday = dateFormat.parse(l.birthday);
-        } catch (Exception e) {
 
-        }
-        DateFormat format = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
-        start_term = format.format(startTermDate);
-        end_term = format.format(endTermDate);
-        startTermRow.setText(start_term);
-        endTermRow.setText(end_term);
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.legislatorTable_progressbar);
-        long progress = l.progress;
-        progressBar.setProgress((int)progress);
-        TextView progress_percent = (TextView) findViewById(R.id.legislatorTable_progressbar_percent);
-        progress_percent.setText(Integer.toString((int)progress) + "%");
-    }*/
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

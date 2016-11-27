@@ -37,6 +37,7 @@ public class Legislator {
      public String imgUrl = "https://theunitedstates.io/images/congress/original/";
      public String name;
      public String label;
+     public boolean favorite = false;
     public long progress;
     public Legislator(JSONObject singleLegislator) {
         jsonData = singleLegislator;
