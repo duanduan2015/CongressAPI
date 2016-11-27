@@ -57,7 +57,6 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
     }
     private class PopulateTable extends AsyncTask<String, Integer, Long> {
         protected Long doInBackground(String[] views) {
-            int count = views.length;
             long totalSize = 0;
             addTableRows();
             return totalSize;
@@ -67,7 +66,14 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
     private void addTableRows() {
         runOnUiThread(new Runnable(){
             public void run() {
-                Legislator l = GlobalData.legislators[GlobalData.legislatorIndex];
+                if (GlobalData.byStates) {
+                    GlobalData.legislatorForDetails = GlobalData.legislators[GlobalData.legislatorIndex];
+                } else if (GlobalData.byHouse) {
+                    GlobalData.legislatorForDetails = GlobalData.legislatorsByHouse[GlobalData.legislatorIndex];
+                } else if (GlobalData.bySenate) {
+                    GlobalData.legislatorForDetails =  GlobalData.legislatorsBySenate[GlobalData.legislatorIndex];
+                }
+                Legislator l = GlobalData.legislatorForDetails;
                 ViewGroup content_view = (ViewGroup) getLayoutInflater().inflate(R.layout.legislator_details_content, null);
                 ViewGroup views = (ViewGroup) findViewById(R.id.display_legislators_details);
                 NetworkImageView image = (NetworkImageView) content_view.findViewById(R.id.imageInDetails);
@@ -149,8 +155,7 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 facebook.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://m.facebook.com/" + GlobalData.legislators[GlobalData.legislatorIndex].facebook_id;
-                        //Log.i("url", url);
+                        String url = "https://m.facebook.com/" + GlobalData.legislatorForDetails.facebook_id;
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);
@@ -160,8 +165,7 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 twitter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://mobile.twitter.com/" + GlobalData.legislators[GlobalData.legislatorIndex].twitter_id;
-                        //Log.i("url", url);
+                        String url = "https://mobile.twitter.com/" + GlobalData.legislatorForDetails.twitter_id;
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);
@@ -171,7 +175,7 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 world.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = GlobalData.legislators[GlobalData.legislatorIndex].website;
+                        String url = GlobalData.legislatorForDetails.website;
                         //Log.i("url", url);
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));

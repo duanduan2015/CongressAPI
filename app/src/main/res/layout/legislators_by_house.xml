@@ -6,11 +6,20 @@
 
     <ListView
         android:id="@+id/legislatorsHouse"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:divider="#A4A4A4"
         android:dividerHeight="1dp"/>
 
+    <LinearLayout
+        android:id="@+id/alphabetical_index_house"
+        android:layout_width="40dp"
+        android:layout_height="fill_parent"
+        android:background="#A4A4A4"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+    </LinearLayout>
 </LinearLayout>

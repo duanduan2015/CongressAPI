@@ -4,5 +4,5 @@
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
     android:gravity="center"
-    android:padding="2dp"
-    android:textSize="13sp" />
+    android:padding="1dp"
+    android:textSize="12sp" />

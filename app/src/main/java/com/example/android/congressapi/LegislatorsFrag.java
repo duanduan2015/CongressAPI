@@ -104,10 +104,10 @@ public class LegislatorsFrag extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             legislatorsByStateView = inflater.inflate(R.layout.legislators_by_states, container, false);
             legislatorList  = (ListView) legislatorsByStateView.findViewById(R.id.legislatorsStates);
-            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.names, GlobalData.imgUrls, GlobalData.labels);
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislators),
+                    GlobalData.getImgUrls(GlobalData.legislators), GlobalData.getLabels(GlobalData.legislators), 0);
             legislatorList.setAdapter(listAdapter);
-            GlobalData.getStatesName();
-            generateIndexList(GlobalData.states, legislatorsByStateView);
+            generateIndexList(GlobalData.getStatesName(GlobalData.legislators), legislatorsByStateView);
             return legislatorsByStateView;
         }
         private void generateIndexList(String[] names, View view) {
@@ -141,37 +141,92 @@ public class LegislatorsFrag extends Fragment {
     }
 
     public static class TabFragment2 extends Fragment {
-        //private ArrayAdapter<String> listAdapter ;
         private LegislatorAdapter listAdapter ;
-        public static int [] prgmImages={R.drawable.bills,R.drawable.legislators,R.drawable.speaker};
-        public static String[] planets = new String[] { "Mercury_house", "Venus_senate", "Earth_senate"};
+        private ListView legislatorList;
+        Map<String, Integer> mapIndex;
+        View legislatorsByHouseView;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View legislatorsByHouseView = inflater.inflate(R.layout.legislators_by_house, container, false);
-            ListView mDrawerList  = (ListView) legislatorsByHouseView.findViewById(R.id.legislatorsHouse);
-            ArrayList<String> planetList = new ArrayList<String>();
-            planetList.addAll(Arrays.asList(planets));
-            //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
-            //listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
-            mDrawerList.setAdapter(listAdapter);
+            legislatorsByHouseView = inflater.inflate(R.layout.legislators_by_house, container, false);
+            legislatorList  = (ListView) legislatorsByHouseView.findViewById(R.id.legislatorsHouse);
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsByHouse),
+                    GlobalData.getImgUrls(GlobalData.legislatorsByHouse), GlobalData.getLabels(GlobalData.legislatorsByHouse), 1);
+            legislatorList.setAdapter(listAdapter);
+            generateIndexList(GlobalData.getLastNames(GlobalData.legislatorsByHouse), legislatorsByHouseView);
             return legislatorsByHouseView;
+        }
+        private void generateIndexList(String[] names, View view) {
+            mapIndex = new LinkedHashMap<String, Integer>();
+            for (int i = 0; i < names.length; i++) {
+                String name = names[i];
+                String index = name.substring(0, 1);
+                if (mapIndex.get(index) == null) {
+                    mapIndex.put(index, i);
+                }
+            }
+            ViewGroup indexLayout = (ViewGroup) legislatorsByHouseView.findViewById(R.id.alphabetical_index_house);
+            TextView textView;
+            List<String> indexList = new ArrayList<String>(mapIndex.keySet());
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            for (String index : indexList) {
+                textView = (TextView) inflater.inflate(R.layout.alphabetical_index, null);
+                textView.setText(index);
+                textView.setOnClickListener(new OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        TextView selectedIndex = (TextView) v;
+                        legislatorList.setSelection(mapIndex.get(selectedIndex.getText()));
+                    }
+                });
+                indexLayout.addView(textView);
+            }
         }
     }
 
     public static class TabFragment3 extends Fragment {
         private LegislatorAdapter listAdapter ;
-        public static int [] prgmImages={R.drawable.bills,R.drawable.legislators,R.drawable.speaker};
-        public static String[] planets = new String[] { "Mercury_house", "Venus_senate", "Earth_senate"};
+        private ListView legislatorList;
+        Map<String, Integer> mapIndex;
+        View legislatorsBySenateView;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View legislatorsBySenateView = inflater.inflate(R.layout.legislators_by_senate, container, false);
-            ListView mDrawerList  = (ListView) legislatorsBySenateView.findViewById(R.id.legislatorsSenate);
-            ArrayList<String> planetList = new ArrayList<String>();
-            planetList.addAll(Arrays.asList(planets));
-            //listAdapter = new ArrayAdapter<String>(getActivity(), R.layout.legislators_item, planetList);
-            //listAdapter = new LegislatorAdapter(getActivity(), planets, prgmImages);
-            mDrawerList.setAdapter(listAdapter);
+            legislatorsBySenateView = inflater.inflate(R.layout.legislators_by_senate, container, false);
+            legislatorList  = (ListView) legislatorsBySenateView.findViewById(R.id.legislatorsSenate);
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsBySenate),
+                    GlobalData.getImgUrls(GlobalData.legislatorsBySenate), GlobalData.getLabels(GlobalData.legislatorsBySenate), 2);
+            legislatorList.setAdapter(listAdapter);
+            generateIndexList(GlobalData.getLastNames(GlobalData.legislatorsBySenate), legislatorsBySenateView);
             return legislatorsBySenateView;
+        }
+        private void generateIndexList(String[] names, View view) {
+            mapIndex = new LinkedHashMap<String, Integer>();
+            for (int i = 0; i < names.length; i++) {
+                String name = names[i];
+                String index = name.substring(0, 1);
+                if (mapIndex.get(index) == null) {
+                    mapIndex.put(index, i);
+                }
+            }
+            ViewGroup indexLayout = (ViewGroup) legislatorsBySenateView.findViewById(R.id.alphabetical_index_senate);
+            TextView textView;
+            List<String> indexList = new ArrayList<String>(mapIndex.keySet());
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            for (String index : indexList) {
+                textView = (TextView) inflater.inflate(R.layout.alphabetical_index, null);
+                textView.setText(index);
+                textView.setOnClickListener(new OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        TextView selectedIndex = (TextView) v;
+                        legislatorList.setSelection(mapIndex.get(selectedIndex.getText()));
+                    }
+                });
+                indexLayout.addView(textView);
+            }
         }
     }
 

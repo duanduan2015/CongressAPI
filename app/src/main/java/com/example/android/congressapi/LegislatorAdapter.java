@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,8 +30,10 @@ public class LegislatorAdapter extends BaseAdapter{
     String[] labels;
     private static LayoutInflater inflater=null;
     Activity main;
-    public LegislatorAdapter(Activity mainActivity, String[] textsList, String[] imageUrls, String[] labels) {
+    int index = 0;
+    public LegislatorAdapter(Activity mainActivity, String[] textsList, String[] imageUrls, String[] labels, int index) {
         // TODO Auto-generated constructor stub
+        this.index = index;
         main = mainActivity;
         texts = textsList;
         context = mainActivity;
@@ -65,7 +68,7 @@ public class LegislatorAdapter extends BaseAdapter{
         ImageButton button;
     }
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         // TODO Auto-generated method stub
         Holder holder = new Holder();
         final View rowView;
@@ -94,6 +97,19 @@ public class LegislatorAdapter extends BaseAdapter{
             public void onClick(View v)
             {
                 GlobalData.legislatorIndex = position;
+                if (index == 0) {
+                    GlobalData.byStates = true;
+                    GlobalData.byHouse = false;
+                    GlobalData.bySenate = false;
+                } else if (index == 1) {
+                    GlobalData.byHouse = true;
+                    GlobalData.bySenate = false;
+                    GlobalData.byStates = false;
+                } else if (index == 2) {
+                    GlobalData.byHouse = false;
+                    GlobalData.bySenate = true;
+                    GlobalData.byStates = false;
+                }
                 Intent intent = new Intent(main, DisplayLegislatorsDetails.class);
                 main.startActivity(intent);
             }
