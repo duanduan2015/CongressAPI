@@ -1,6 +1,7 @@
 package com.example.android.congressapi;
 
 //import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.system.Os;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +23,10 @@ import android.support.v4.app.FragmentManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Cache;
@@ -42,6 +46,9 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.microedition.khronos.opengles.GL;
 
@@ -89,17 +96,47 @@ public class LegislatorsFrag extends Fragment {
 
 
     public static class TabFragment1 extends Fragment {
-        //private ArrayAdapter<String> listAdapter ;
         private LegislatorAdapter listAdapter ;
-        //public static String [] imageUrls = GlobalData.imgUrls;
-        //public static String[] names = GlobalData.names;
+        private ListView legislatorList;
+        Map<String, Integer> mapIndex;
+        View legislatorsByStateView;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View legislatorsByStateView = inflater.inflate(R.layout.legislators_by_states, container, false);
-            ListView mDrawerList  = (ListView) legislatorsByStateView.findViewById(R.id.legislatorsStates);
+            legislatorsByStateView = inflater.inflate(R.layout.legislators_by_states, container, false);
+            legislatorList  = (ListView) legislatorsByStateView.findViewById(R.id.legislatorsStates);
             listAdapter = new LegislatorAdapter(getActivity(), GlobalData.names, GlobalData.imgUrls, GlobalData.labels);
-            mDrawerList.setAdapter(listAdapter);
+            legislatorList.setAdapter(listAdapter);
+            GlobalData.getStatesName();
+            generateIndexList(GlobalData.states, legislatorsByStateView);
             return legislatorsByStateView;
+        }
+        private void generateIndexList(String[] names, View view) {
+            mapIndex = new LinkedHashMap<String, Integer>();
+            for (int i = 0; i < names.length; i++) {
+                String name = names[i];
+                String index = name.substring(0, 1);
+                if (mapIndex.get(index) == null) {
+                    mapIndex.put(index, i);
+                }
+            }
+            ViewGroup indexLayout = (ViewGroup) legislatorsByStateView.findViewById(R.id.alphabetical_index);
+            TextView textView;
+            List<String> indexList = new ArrayList<String>(mapIndex.keySet());
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            for (String index : indexList) {
+                textView = (TextView) inflater.inflate(R.layout.alphabetical_index, null);
+                textView.setText(index);
+                textView.setOnClickListener(new OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        TextView selectedIndex = (TextView) v;
+                        legislatorList.setSelection(mapIndex.get(selectedIndex.getText()));
+                    }
+                });
+                indexLayout.addView(textView);
+            }
         }
     }
 

@@ -1,11 +1,15 @@
 package com.example.android.congressapi;
 
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Created by duanduan on 11/22/16.
@@ -17,6 +21,7 @@ public class GlobalData {
     public static String[] imgUrls;
     public static String[] names;
     public static String[] labels;
+    public static String[] states;
     public static void getLegislators() {
         try {
             JSONArray results = legislatorsJason.getJSONArray("results");
@@ -29,6 +34,12 @@ public class GlobalData {
         } catch (final JSONException e) {
             Log.i("error", e.toString());
         }
+        Arrays.sort(legislators, new Comparator<Legislator>() {
+            @Override
+            public int compare(Legislator lhs, Legislator rhs) {
+                return lhs.state_name.compareTo(rhs.state_name);
+            }
+        });
     }
     public static void getLabels() {
         int num = legislators.length;
@@ -49,6 +60,13 @@ public class GlobalData {
         names = new String[num];
         for (int i = 0; i < num; i++) {
             names[i] = legislators[i].name;
+        }
+    }
+    public static void getStatesName() {
+        int num = legislators.length;
+        states = new String[num];
+        for (int i = 0; i < num; i++) {
+            states[i] = legislators[i].state_name;
         }
     }
 }
