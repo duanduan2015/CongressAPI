@@ -117,6 +117,7 @@ public class FavoritesFrag extends Fragment {
             listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsByFavorite),
                     GlobalData.getImgUrls(GlobalData.legislatorsByFavorite), GlobalData.getLabels(GlobalData.legislatorsByFavorite), 3);
             legislatorList.setAdapter(listAdapter);
+            generateIndexList(GlobalData.getLastNames(GlobalData.legislatorsByFavorite), legislatorsByFavoriteView);
         }
         private void generateIndexList(String[] names, View view) {
             mapIndex = new LinkedHashMap<String, Integer>();
@@ -128,6 +129,7 @@ public class FavoritesFrag extends Fragment {
                 }
             }
             ViewGroup indexLayout = (ViewGroup) legislatorsByFavoriteView.findViewById(R.id.alphabetical_index_favorites);
+            indexLayout.removeAllViews();
             TextView textView;
             List<String> indexList = new ArrayList<String>(mapIndex.keySet());
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

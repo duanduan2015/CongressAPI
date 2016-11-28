@@ -46,7 +46,7 @@ public class Bill {
             sponsor_first_name = jsonData.getJSONObject("sponsor").getString("first_name");
             sponsor_last_name = jsonData.getJSONObject("sponsor").getString("last_name");
             sponsor_title = jsonData.getJSONObject("sponsor").getString("title");
-            bill_type = jsonData.getString("bill_type");
+            bill_type = jsonData.getString("bill_type").toUpperCase();
             chamber = jsonData.getString("chamber");
             chamber = chamber.substring(0,1).toUpperCase() + chamber.substring(1);
             boolean active = jsonData.getJSONObject("history").getBoolean("active");
