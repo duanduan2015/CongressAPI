@@ -1,6 +1,7 @@
 package com.example.android.congressapi;
 
 //import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -162,11 +163,8 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_place, fr);
             fragmentTransaction.commit();
         } else if (id == R.id.aboutMe) {
-            Fragment fr = new FavoritesFrag();
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_place, fr);
-            fragmentTransaction.commit();
+            Intent intent = new Intent(this, AboutMe.class);
+            this.startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
