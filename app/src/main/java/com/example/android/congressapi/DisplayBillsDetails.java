@@ -72,6 +72,8 @@ public class DisplayBillsDetails extends AppCompatActivity {
                     GlobalData.billForDetails = GlobalData.activeBills[GlobalData.billIndex];
                 } else if (GlobalData.isNewBills) {
                     GlobalData.billForDetails = GlobalData.newBills[GlobalData.billIndex];
+                } else if (GlobalData.isFavoriteBills) {
+                    GlobalData.billForDetails = GlobalData.favoriteBills[GlobalData.billIndex];
                 }
                 Bill b = GlobalData.billForDetails;
 

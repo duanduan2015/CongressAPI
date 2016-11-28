@@ -77,6 +77,8 @@ public class DisplayCommitteesDetails extends AppCompatActivity {
                     GlobalData.committeeForDetails = GlobalData.senateCommittees[GlobalData.committeeIndex];
                 } else if (GlobalData.isJointCommittees) {
                     GlobalData.committeeForDetails = GlobalData.jointCommittees[GlobalData.committeeIndex];
+                } else if (GlobalData.isFavoriteCommittees) {
+                    GlobalData.committeeForDetails = GlobalData.favoriteCommittees[GlobalData.committeeIndex];
                 }
 
                 Committee c = GlobalData.committeeForDetails;

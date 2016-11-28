@@ -19,31 +19,37 @@ public class GlobalData {
     public static Legislator[] legislators;
     public static Legislator[] legislatorsByHouse;
     public static Legislator[] legislatorsBySenate;
+    public static Legislator[] legislatorsByFavorite;
     public static Legislator legislatorForDetails;
     public static int legislatorIndex;
     public static boolean byStates;
     public static boolean byHouse;
     public static boolean bySenate;
+    public static boolean byFavorite;
 
     public static JSONObject activeBillsJason;
     public static JSONObject newBillsJason;
     public static int billIndex;
     public static Bill[] activeBills;
     public static Bill[] newBills;
+    public static Bill[] favoriteBills;
     public static Bill billForDetails;
     public static boolean isActiveBills;
     public static boolean isNewBills;
+    public static boolean isFavoriteBills;
 
     public static JSONObject committeesJason;
     public static Committee[] committees;
     public static Committee[] houseCommittees;
     public static Committee[] senateCommittees;
     public static Committee[] jointCommittees;
+    public static Committee[] favoriteCommittees;
     public static Committee committeeForDetails;
     public static int committeeIndex;
     public static boolean isHouseCommittees;
     public static boolean isSenateCommittees;
     public static boolean isJointCommittees;
+    public static boolean isFavoriteCommittees;
 
     public static void getCommittees() {
         int numOfHouse = 0;
@@ -105,7 +111,30 @@ public class GlobalData {
             }
         });
     }
+    public static void getFavoriteCommittees() {
+        if (committees == null) {
+            return;
+        }
+        int num = committees.length;
+        int numOfFavorites = 0;
+        for (int i = 0; i < num; i++) {
+            if (committees[i].favorite) {
+                numOfFavorites++;
+            }
+        }
+        favoriteCommittees = new Committee[numOfFavorites];
+        numOfFavorites = 0;
+        for (int i = 0; i < num; i++) {
+            if (committees[i].favorite) {
+                favoriteCommittees[numOfFavorites] = committees[i];
+                numOfFavorites++;
+            }
+        }
+    }
     public static String[] getCommitteesId(Committee[] committees) {
+        if (committees == null) {
+            return new String[0];
+        }
         int num = committees.length;
         String[] ids = new String[num];
         for (int i = 0; i < num; i++) {
@@ -114,6 +143,9 @@ public class GlobalData {
         return ids;
     }
     public static String[] getCommitteesName(Committee[] committees) {
+        if (committees == null) {
+            return new String[0];
+        }
         int num = committees.length;
         String[] names = new String[num];
         for (int i = 0; i < num; i++) {
@@ -123,6 +155,9 @@ public class GlobalData {
     }
 
     public static String[] getCommitteesChamber(Committee[] committees) {
+        if (committees == null) {
+            return new String[0];
+        }
         int num = committees.length;
         String[] chamber = new String[num];
         for (int i = 0; i < num; i++) {
@@ -168,7 +203,40 @@ public class GlobalData {
             }
         });
     }
+    public static void getFavoriteBills() {
+        if (newBills == null || activeBills == null) {
+            return;
+        }
+        int numOfFavorites = 0;
+        for (Bill b : newBills) {
+            if (b.favorite) {
+                numOfFavorites++;
+            }
+        }
+        for (Bill b : activeBills) {
+            if (b.favorite) {
+                numOfFavorites++;
+            }
+        }
+        favoriteBills = new Bill[numOfFavorites];
+        numOfFavorites = 0;
+        for (int i = 0; i < activeBills.length; i++) {
+            if (activeBills[i].favorite) {
+                favoriteBills[numOfFavorites] = activeBills[i];
+                numOfFavorites++;
+            }
+        }
+        for (int i = 0; i < newBills.length; i++) {
+            if (newBills[i].favorite) {
+                favoriteBills[numOfFavorites] = newBills[i];
+                numOfFavorites++;
+            }
+        }
+    }
     public static String[] getBillsId(Bill[] bills) {
+        if (bills == null) {
+            return new String[0];
+        }
         int num = bills.length;
         String[] ids = new String[num];
         for (int i = 0; i < num; i++) {
@@ -177,6 +245,9 @@ public class GlobalData {
         return ids;
     }
     public static String[] getBillsTitle(Bill[] bills) {
+        if (bills == null) {
+            return new String[0];
+        }
         int num = bills.length;
         String[] titles = new String[num];
         for (int i = 0; i < num; i++) {
@@ -185,6 +256,9 @@ public class GlobalData {
         return titles;
     }
     public static String[] getBillsDate(Bill[] bills) {
+        if (bills == null) {
+            return new String[0];
+        }
         int num = bills.length;
         String[] dates = new String[num];
         for (int i = 0; i < num; i++) {
@@ -244,7 +318,30 @@ public class GlobalData {
             }
         });
     }
+    public static void getFavoriteLegislators() {
+        if (legislators == null) {
+            return;
+        }
+        int num = legislators.length;
+        int numOfFavorites = 0;
+        for (int i = 0; i < num; i++) {
+            if (legislators[i].favorite) {
+                numOfFavorites++;
+            }
+        }
+        legislatorsByFavorite = new Legislator[numOfFavorites];
+        numOfFavorites = 0;
+        for (int i = 0; i < num; i++) {
+            if (legislators[i].favorite) {
+                legislatorsByFavorite[numOfFavorites] = legislators[i];
+                numOfFavorites++;
+            }
+        }
+    }
     public static String[] getLabels(Legislator[] legislators) {
+        if (legislators == null) {
+            return new String[0];
+        }
         int num = legislators.length;
         String[] labels = new String[num];
         for (int i = 0; i < num; i++) {
@@ -253,6 +350,9 @@ public class GlobalData {
         return labels;
     }
     public static String[] getImgUrls(Legislator[] legislators) {
+        if (legislators == null) {
+            return new String[0];
+        }
         int num = legislators.length;
         String[] imgUrls = new String[num];
         for (int i = 0; i < num; i++) {
@@ -261,6 +361,9 @@ public class GlobalData {
         return imgUrls;
     }
     public static String[] getNames(Legislator[] legislators) {
+        if (legislators == null) {
+            return new String[0];
+        }
         int num = legislators.length;
         String[] names = new String[num];
         for (int i = 0; i < num; i++) {
@@ -269,6 +372,9 @@ public class GlobalData {
         return names;
     }
     public static String[] getLastNames(Legislator[] legislators) {
+        if (legislators == null) {
+            return new String[0];
+        }
         int num = legislators.length;
         String[] names = new String[num];
         for (int i = 0; i < num; i++) {
@@ -277,6 +383,9 @@ public class GlobalData {
         return names;
     }
     public static String[] getStatesName(Legislator[] legislators) {
+        if (legislators == null) {
+            return new String[0];
+        }
         int num = legislators.length;
         String[] states = new String[num];
         for (int i = 0; i < num; i++) {

@@ -101,9 +101,15 @@ public class BillsAdapter extends BaseAdapter{
                 if (index == 0) {
                     GlobalData.isActiveBills = true;
                     GlobalData.isNewBills = false;
+                    GlobalData.isFavoriteBills = false;
                 } else if (index == 1) {
                     GlobalData.isNewBills = true;
                     GlobalData.isActiveBills = false;
+                    GlobalData.isFavoriteBills = false;
+                } else if (index == 2) {
+                    GlobalData.isNewBills = false;
+                    GlobalData.isActiveBills = false;
+                    GlobalData.isFavoriteBills = true;
                 }
                 Intent intent = new Intent(main, DisplayBillsDetails.class);
                 main.startActivity(intent);

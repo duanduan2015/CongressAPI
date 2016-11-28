@@ -101,14 +101,22 @@ public class LegislatorAdapter extends BaseAdapter{
                     GlobalData.byStates = true;
                     GlobalData.byHouse = false;
                     GlobalData.bySenate = false;
+                    GlobalData.byFavorite = false;
                 } else if (index == 1) {
                     GlobalData.byHouse = true;
                     GlobalData.bySenate = false;
                     GlobalData.byStates = false;
+                    GlobalData.byFavorite = false;
                 } else if (index == 2) {
                     GlobalData.byHouse = false;
                     GlobalData.bySenate = true;
                     GlobalData.byStates = false;
+                    GlobalData.byFavorite = false;
+                } else if (index == 3) {
+                    GlobalData.byHouse = false;
+                    GlobalData.bySenate = false;
+                    GlobalData.byStates = false;
+                    GlobalData.byFavorite = true;
                 }
                 Intent intent = new Intent(main, DisplayLegislatorsDetails.class);
                 main.startActivity(intent);

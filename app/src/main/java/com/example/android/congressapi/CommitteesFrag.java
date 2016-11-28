@@ -63,7 +63,7 @@ public class CommitteesFrag extends Fragment {
         return view;
     }
     public static class TabFragment1 extends Fragment {
-        private CommitteesAdapter listAdapter ;
+        private CommitteesAdapter listAdapter;
         private ListView committeesList;
         View houseCommitteesView;
         @Override
@@ -78,7 +78,7 @@ public class CommitteesFrag extends Fragment {
     }
 
     public static class TabFragment2 extends Fragment {
-        private CommitteesAdapter listAdapter ;
+        private CommitteesAdapter listAdapter;
         private ListView committeesList;
         View senateCommitteesView;
         @Override

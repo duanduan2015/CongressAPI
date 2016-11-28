@@ -72,6 +72,8 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                     GlobalData.legislatorForDetails = GlobalData.legislatorsByHouse[GlobalData.legislatorIndex];
                 } else if (GlobalData.bySenate) {
                     GlobalData.legislatorForDetails =  GlobalData.legislatorsBySenate[GlobalData.legislatorIndex];
+                } else if (GlobalData.byFavorite) {
+                    GlobalData.legislatorForDetails =  GlobalData.legislatorsByFavorite[GlobalData.legislatorIndex];
                 }
                 Legislator l = GlobalData.legislatorForDetails;
                 ViewGroup content_view = (ViewGroup) getLayoutInflater().inflate(R.layout.legislator_details_content, null);

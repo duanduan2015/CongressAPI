@@ -102,14 +102,22 @@ public class CommitteesAdapter extends BaseAdapter{
                     GlobalData.isHouseCommittees = true;
                     GlobalData.isJointCommittees = false;
                     GlobalData.isSenateCommittees = false;
+                    GlobalData.isFavoriteCommittees = false;
                 } else if (index == 1) {
                     GlobalData.isSenateCommittees = true;
                     GlobalData.isHouseCommittees = false;
                     GlobalData.isJointCommittees = false;
+                    GlobalData.isFavoriteCommittees = false;
                 } else if (index == 2) {
                     GlobalData.isJointCommittees = true;
                     GlobalData.isHouseCommittees = false;
                     GlobalData.isSenateCommittees = false;
+                    GlobalData.isFavoriteCommittees = false;
+                } else if (index == 3) {
+                    GlobalData.isJointCommittees = false;
+                    GlobalData.isHouseCommittees = false;
+                    GlobalData.isSenateCommittees = false;
+                    GlobalData.isFavoriteCommittees = true;
                 }
                 Intent intent = new Intent(main, DisplayCommitteesDetails.class);
                 main.startActivity(intent);
