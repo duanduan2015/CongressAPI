@@ -144,11 +144,17 @@ public class MainActivity extends AppCompatActivity
                 new GetBillsJsonData().execute(urls);
             }
         } else if (id == R.id.committees) {
-            Fragment fr = new CommitteesFrag();
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_place, fr);
-            fragmentTransaction.commit();
+            if (GlobalData.houseCommittees != null && GlobalData.senateCommittees != null && GlobalData.jointCommittees != null) {
+                Fragment fr = new CommitteesFrag();
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+                fragmentTransaction.commit();
+            } else {
+                String[] urls = new String[1];
+                urls[0] = "http://homework8-148505.appspot.com/main.php?query=committees";
+                new GetCommitteesJsonData().execute(urls);
+            }
         } else if (id == R.id.favorites) {
             Fragment fr = new FavoritesFrag();
             FragmentManager fm = getSupportFragmentManager();
@@ -193,6 +199,33 @@ public class MainActivity extends AppCompatActivity
                             GlobalData.newBillsJason = response;
                             GlobalData.getNewBills();
                             Fragment fr = new BillsFrag();
+                            FragmentManager fm = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_place, fr);
+                            fragmentTransaction.commit();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
+            // Access the RequestQueue through your singleton class.
+            MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsObjRequestNew);
+            return totalSize;
+        }
+    }
+    private class GetCommitteesJsonData extends AsyncTask<String, Integer, Long> {
+        protected Long doInBackground(String[] urls) {
+            long totalSize = 0;
+            JsonObjectRequest jsObjRequestNew = new JsonObjectRequest
+                    (Request.Method.GET, urls[0], null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            GlobalData.committeesJason = response;
+                            GlobalData.getCommittees();
+                            Fragment fr = new CommitteesFrag();
                             FragmentManager fm = getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment_place, fr);

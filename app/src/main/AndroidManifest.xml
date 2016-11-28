@@ -26,8 +26,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".DisplayBillsDetails"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".DisplayCommitteesDetails"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
     </application>
 
 </manifest>

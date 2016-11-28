@@ -34,6 +34,102 @@ public class GlobalData {
     public static boolean isActiveBills;
     public static boolean isNewBills;
 
+    public static JSONObject committeesJason;
+    public static Committee[] committees;
+    public static Committee[] houseCommittees;
+    public static Committee[] senateCommittees;
+    public static Committee[] jointCommittees;
+    public static Committee committeeForDetails;
+    public static int committeeIndex;
+    public static boolean isHouseCommittees;
+    public static boolean isSenateCommittees;
+    public static boolean isJointCommittees;
+
+    public static void getCommittees() {
+        int numOfHouse = 0;
+        int numOfSenate = 0;
+        int numOfJoint = 0;
+        int num = 0;
+        try {
+            JSONArray results = committeesJason.getJSONArray("results");
+            num = results.length();
+            committees = new Committee[num];
+            for (int i = 0; i < num; i++) {
+                committees[i] = new Committee(results.getJSONObject(i));
+                committees[i].populateCommittee();
+                if (committees[i].chamber.equals("House")) {
+                    numOfHouse++;
+                } else if(committees[i].chamber.equals("Senate")) {
+                    numOfSenate++;
+                } else if(committees[i].chamber.equals("Joint")) {
+                    numOfJoint++;
+                }
+            }
+        } catch (final JSONException e) {
+            Log.i("error", e.toString());
+        }
+        houseCommittees = new Committee[numOfHouse];
+        senateCommittees = new Committee[numOfSenate];
+        jointCommittees = new Committee[numOfJoint];
+        numOfHouse = 0;
+        numOfJoint = 0;
+        numOfSenate = 0;
+        for (int i = 0; i < num; i++) {
+            if (committees[i].chamber.equals("House")) {
+                houseCommittees[numOfHouse] = committees[i];
+                numOfHouse++;
+            } else if(committees[i].chamber.equals("Senate")) {
+                senateCommittees[numOfSenate] = committees[i];
+                numOfSenate++;
+            } else if(committees[i].chamber.equals("Joint")) {
+                jointCommittees[numOfJoint] = committees[i];
+                numOfJoint++;
+            }
+        }
+        Arrays.sort(houseCommittees, new Comparator<Committee>() {
+            @Override
+            public int compare(Committee lhs, Committee rhs) {
+                return lhs.committee_name.compareTo(rhs.committee_name);
+            }
+        });
+        Arrays.sort(senateCommittees, new Comparator<Committee>() {
+            @Override
+            public int compare(Committee lhs, Committee rhs) {
+                return lhs.committee_name.compareTo(rhs.committee_name);
+            }
+        });
+        Arrays.sort(jointCommittees, new Comparator<Committee>() {
+            @Override
+            public int compare(Committee lhs, Committee rhs) {
+                return lhs.committee_name.compareTo(rhs.committee_name);
+            }
+        });
+    }
+    public static String[] getCommitteesId(Committee[] committees) {
+        int num = committees.length;
+        String[] ids = new String[num];
+        for (int i = 0; i < num; i++) {
+            ids[i] = committees[i].committee_id;
+        }
+        return ids;
+    }
+    public static String[] getCommitteesName(Committee[] committees) {
+        int num = committees.length;
+        String[] names = new String[num];
+        for (int i = 0; i < num; i++) {
+            names[i] = committees[i].committee_name;
+        }
+        return names;
+    }
+
+    public static String[] getCommitteesChamber(Committee[] committees) {
+        int num = committees.length;
+        String[] chamber = new String[num];
+        for (int i = 0; i < num; i++) {
+            chamber[i] = committees[i].chamber;
+        }
+        return chamber;
+    }
     public static void getActiveBills() {
         try {
             JSONArray results = activeBillsJason.getJSONArray("results");
