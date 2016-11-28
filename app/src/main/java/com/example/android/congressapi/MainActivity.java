@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        String[] urls = new String[3];
+        String[] urls = new String[1];
         urls[0] = "http://homework8-148505.appspot.com/main.php?query=legislators";
-        new GetJsonData().execute(urls);
+        new GetLegislatorJsonData().execute(urls);
     }
 
-    private class GetJsonData extends AsyncTask<String, Integer, Long> {
+    private class GetLegislatorJsonData extends AsyncTask<String, Integer, Long> {
         protected Long doInBackground(String[] urls) {
             long totalSize = 0;
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
@@ -123,27 +123,91 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fr = null;
         if (id == R.id.legislators) {
             // Handle the camera action
-            fr = new LegislatorsFrag();
+            Fragment fr = new LegislatorsFrag();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_place, fr);
+            fragmentTransaction.commit();
         } else if (id == R.id.bills) {
-            fr = new BillsFrag();
+            if (GlobalData.activeBills != null && GlobalData.newBills != null) {
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                Fragment fr = new BillsFrag();
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+                fragmentTransaction.commit();
+            } else {
+                String[] urls = new String[2];
+                urls[0] = "http://homework8-148505.appspot.com/main.php?query=billsTrue";
+                urls[1] = "http://homework8-148505.appspot.com/main.php?query=billsFalse";
+                new GetBillsJsonData().execute(urls);
+            }
         } else if (id == R.id.committees) {
-            fr = new CommitteesFrag();
+            Fragment fr = new CommitteesFrag();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_place, fr);
+            fragmentTransaction.commit();
         } else if (id == R.id.favorites) {
-            fr = new FavoritesFrag();
+            Fragment fr = new FavoritesFrag();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_place, fr);
+            fragmentTransaction.commit();
         } else if (id == R.id.aboutMe) {
-            fr = new FavoritesFrag();
+            Fragment fr = new FavoritesFrag();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_place, fr);
+            fragmentTransaction.commit();
         }
-
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_place, fr);
-        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private class GetBillsJsonData extends AsyncTask<String, Integer, Long> {
+        protected Long doInBackground(String[] urls) {
+            long totalSize = 0;
+            JsonObjectRequest jsObjRequestActive = new JsonObjectRequest
+                    (Request.Method.GET, urls[0], null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            GlobalData.activeBillsJason = response;
+                            GlobalData.getActiveBills();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
+            // Access the RequestQueue through your singleton class.
+            MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsObjRequestActive);
+            JsonObjectRequest jsObjRequestNew = new JsonObjectRequest
+                    (Request.Method.GET, urls[1], null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            GlobalData.newBillsJason = response;
+                            GlobalData.getNewBills();
+                            Fragment fr = new BillsFrag();
+                            FragmentManager fm = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_place, fr);
+                            fragmentTransaction.commit();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
+            // Access the RequestQueue through your singleton class.
+            MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsObjRequestNew);
+            return totalSize;
+        }
     }
 }

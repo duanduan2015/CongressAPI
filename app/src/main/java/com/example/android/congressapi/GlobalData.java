@@ -24,6 +24,78 @@ public class GlobalData {
     public static boolean byStates;
     public static boolean byHouse;
     public static boolean bySenate;
+
+    public static JSONObject activeBillsJason;
+    public static JSONObject newBillsJason;
+    public static int billIndex;
+    public static Bill[] activeBills;
+    public static Bill[] newBills;
+    public static Bill billForDetails;
+    public static boolean isActiveBills;
+    public static boolean isNewBills;
+
+    public static void getActiveBills() {
+        try {
+            JSONArray results = activeBillsJason.getJSONArray("results");
+            int num = results.length();
+            activeBills = new Bill[num];
+            for (int i = 0; i < num; i++) {
+                activeBills[i] = new Bill(results.getJSONObject(i));
+                activeBills[i].populateBill();
+            }
+        } catch (final JSONException e) {
+            Log.i("error", e.toString());
+        }
+        Arrays.sort(activeBills, new Comparator<Bill>() {
+            @Override
+            public int compare(Bill lhs, Bill rhs) {
+                return rhs.introduced_date.compareTo(lhs.introduced_date);
+            }
+        });
+    }
+    public static void getNewBills() {
+        try {
+            JSONArray results = newBillsJason.getJSONArray("results");
+            int num = results.length();
+            newBills = new Bill[num];
+            for (int i = 0; i < num; i++) {
+                newBills[i] = new Bill(results.getJSONObject(i));
+                newBills[i].populateBill();
+            }
+        } catch (final JSONException e) {
+            Log.i("error", e.toString());
+        }
+        Arrays.sort(newBills, new Comparator<Bill>() {
+            @Override
+            public int compare(Bill lhs, Bill rhs) {
+                return rhs.introduced_date.compareTo(lhs.introduced_date);
+            }
+        });
+    }
+    public static String[] getBillsId(Bill[] bills) {
+        int num = bills.length;
+        String[] ids = new String[num];
+        for (int i = 0; i < num; i++) {
+            ids[i] = bills[i].bill_id;
+        }
+        return ids;
+    }
+    public static String[] getBillsTitle(Bill[] bills) {
+        int num = bills.length;
+        String[] titles = new String[num];
+        for (int i = 0; i < num; i++) {
+            titles[i] = bills[i].label_title;
+        }
+        return titles;
+    }
+    public static String[] getBillsDate(Bill[] bills) {
+        int num = bills.length;
+        String[] dates = new String[num];
+        for (int i = 0; i < num; i++) {
+            dates[i] = bills[i].introduced_on_date;
+        }
+        return dates;
+    }
     public static void getLegislators() {
         try {
             JSONArray results = legislatorsJason.getJSONArray("results");

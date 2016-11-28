@@ -107,7 +107,7 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 String start_term = l.term_start;
                 TextView endTermRow = (TextView) content_view.findViewById(R.id.legislatorTable_end_term);
                 String end_term = l.term_end;
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date startTermDate = new Date();
                 Date endTermDate = new Date();
                 Date birthdayDate = new Date();
@@ -118,7 +118,7 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
-                DateFormat format = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
+                DateFormat format = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
                 start_term = format.format(startTermDate);
                 end_term = format.format(endTermDate);
                 startTermRow.setText(start_term);
@@ -137,16 +137,20 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 TextView birthday = (TextView) content_view.findViewById(R.id.legislatorTable_birthday);
                 birthday.setText(format.format(birthdayDate));
                 ImageButton favorite = (ImageButton) content_view.findViewById(R.id.favorite);
-                favorite.setBackgroundResource(R.drawable.star_default);
+                if (l.favorite) {
+                    favorite.setBackgroundResource(R.drawable.star_pressed);
+                } else {
+                    favorite.setBackgroundResource(R.drawable.star_default);
+                }
                 favorite.setOnClickListener(new ImageButton.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean isFavorite = GlobalData.legislators[GlobalData.legislatorIndex].favorite;
+                        boolean isFavorite = GlobalData.legislatorForDetails.favorite;
                         if (isFavorite) {
-                            GlobalData.legislators[GlobalData.legislatorIndex].favorite = false;
+                            GlobalData.legislatorForDetails.favorite = false;
                             v.setBackgroundResource(R.drawable.star_default);
                         } else {
-                            GlobalData.legislators[GlobalData.legislatorIndex].favorite = true;
+                            GlobalData.legislatorForDetails.favorite = true;
                             v.setBackgroundResource(R.drawable.star_pressed);
                         }
                     }

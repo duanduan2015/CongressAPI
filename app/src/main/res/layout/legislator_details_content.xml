@@ -72,47 +72,56 @@
         android:id="@+id/legislatorTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:shrinkColumns="1">
         <TableRow
             android:layout_gravity="center"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:text="Name:"
                 android:textColor="#190707"
                 android:textStyle="bold"
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_name"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:text="Email:"
                 android:textColor="#190707"
                 android:textStyle="bold"
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_email"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="Chamber:"
                 android:textColor="#190707"
@@ -120,16 +129,20 @@
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_chamber"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="Contact:"
                 android:textColor="#190707"
@@ -137,16 +150,20 @@
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_contact"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="Start Term:"
                 android:textColor="#190707"
@@ -154,16 +171,20 @@
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_start_term"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="End Term:"
                 android:textColor="#190707"
@@ -171,16 +192,20 @@
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_end_term"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="0dp"
                 android:layout_marginBottom="15dp"
                 android:text="Term:"
@@ -215,11 +240,11 @@
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="Office:"
                 android:textColor="#190707"
@@ -227,16 +252,20 @@
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_office"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="State:"
                 android:textColor="#190707"
@@ -244,16 +273,20 @@
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_state"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="Fax:"
                 android:textColor="#190707"
@@ -261,16 +294,20 @@
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_fax"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
         <TableRow
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_gravity="left"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="Birthday:"
                 android:textColor="#190707"
@@ -278,7 +315,11 @@
                 android:textSize="15dp"/>
             <TextView
                 android:id="@+id/legislatorTable_birthday"
-                android:layout_gravity="left"/>
+                android:paddingRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:textAlignment="textEnd"/>
         </TableRow>
     </TableLayout>
 </LinearLayout>
