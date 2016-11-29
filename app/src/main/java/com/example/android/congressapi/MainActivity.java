@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity
             } else {
                 String[] urls = new String[2];
                 urls[0] = "http://homework8-148505.appspot.com/main.php?query=billsTrue";
-                urls[1] = "http://homework8-148505.appspot.com/main.php?query=billsFalse";
+                urls[1] = "http://homework8-148505.appspot.com/main.php?query=billsNew";
                 new GetBillsJsonData().execute(urls);
             }
         } else if (id == R.id.committees) {

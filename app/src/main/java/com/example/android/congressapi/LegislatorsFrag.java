@@ -104,7 +104,7 @@ public class LegislatorsFrag extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             legislatorsByStateView = inflater.inflate(R.layout.legislators_by_states, container, false);
             legislatorList  = (ListView) legislatorsByStateView.findViewById(R.id.legislatorsStates);
-            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislators),
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislators, true),
                     GlobalData.getImgUrls(GlobalData.legislators), GlobalData.getLabels(GlobalData.legislators), 0);
             legislatorList.setAdapter(listAdapter);
             generateIndexList(GlobalData.getStatesName(GlobalData.legislators), legislatorsByStateView);
@@ -149,7 +149,7 @@ public class LegislatorsFrag extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             legislatorsByHouseView = inflater.inflate(R.layout.legislators_by_house, container, false);
             legislatorList  = (ListView) legislatorsByHouseView.findViewById(R.id.legislatorsHouse);
-            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsByHouse),
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsByHouse, true),
                     GlobalData.getImgUrls(GlobalData.legislatorsByHouse), GlobalData.getLabels(GlobalData.legislatorsByHouse), 1);
             legislatorList.setAdapter(listAdapter);
             generateIndexList(GlobalData.getLastNames(GlobalData.legislatorsByHouse), legislatorsByHouseView);
@@ -194,7 +194,7 @@ public class LegislatorsFrag extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             legislatorsBySenateView = inflater.inflate(R.layout.legislators_by_senate, container, false);
             legislatorList  = (ListView) legislatorsBySenateView.findViewById(R.id.legislatorsSenate);
-            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsBySenate),
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsBySenate, true),
                     GlobalData.getImgUrls(GlobalData.legislatorsBySenate), GlobalData.getLabels(GlobalData.legislatorsBySenate), 2);
             legislatorList.setAdapter(listAdapter);
             generateIndexList(GlobalData.getLastNames(GlobalData.legislatorsBySenate), legislatorsBySenateView);

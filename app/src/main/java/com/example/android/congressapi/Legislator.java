@@ -36,6 +36,7 @@ public class Legislator {
      public String facebook_id;
      public String imgUrl = "https://theunitedstates.io/images/congress/original/";
      public String name;
+     public String name_label;
      public String label;
      public boolean favorite = false;
     public long progress;
@@ -101,6 +102,7 @@ public class Legislator {
         }
         imgUrl = imgUrl + bioguide_id + ".jpg";
         name = title + ". " + last_name + ", " + first_name;
+        name_label = last_name + ", " + first_name;
         label = "(" + party + ")" + state_name + " - " + "District" + " " + district;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         Date startTermDate = new Date();

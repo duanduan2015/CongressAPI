@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:textStyle="bold"
-            android:text="951-258-4004"
+            android:text="4787475981"
             android:layout_gravity="center"/>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

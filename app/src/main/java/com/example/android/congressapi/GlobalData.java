@@ -378,14 +378,18 @@ public class GlobalData {
         }
         return imgUrls;
     }
-    public static String[] getNames(Legislator[] legislators) {
+    public static String[] getNames(Legislator[] legislators, boolean label) {
         if (legislators == null) {
             return new String[0];
         }
         int num = legislators.length;
         String[] names = new String[num];
         for (int i = 0; i < num; i++) {
-            names[i] = legislators[i].name;
+            if (label) {
+                names[i] = legislators[i].name_label;
+            } else {
+                names[i] = legislators[i].name;
+            }
         }
         return names;
     }

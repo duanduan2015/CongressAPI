@@ -105,7 +105,7 @@ public class FavoritesFrag extends Fragment {
             legislatorsByFavoriteView = inflater.inflate(R.layout.legislators_by_favorites, container, false);
             legislatorList  = (ListView) legislatorsByFavoriteView.findViewById(R.id.legislatorsFavorites);
             GlobalData.getFavoriteLegislators();
-            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsByFavorite),
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsByFavorite, true),
                     GlobalData.getImgUrls(GlobalData.legislatorsByFavorite), GlobalData.getLabels(GlobalData.legislatorsByFavorite), 3);
             legislatorList.setAdapter(listAdapter);
             generateIndexList(GlobalData.getLastNames(GlobalData.legislatorsByFavorite), legislatorsByFavoriteView);
@@ -114,7 +114,7 @@ public class FavoritesFrag extends Fragment {
         public void onResume() {
             super.onResume();
             GlobalData.getFavoriteLegislators();
-            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsByFavorite),
+            listAdapter = new LegislatorAdapter(getActivity(), GlobalData.getNames(GlobalData.legislatorsByFavorite, true),
                     GlobalData.getImgUrls(GlobalData.legislatorsByFavorite), GlobalData.getLabels(GlobalData.legislatorsByFavorite), 3);
             legislatorList.setAdapter(listAdapter);
             generateIndexList(GlobalData.getLastNames(GlobalData.legislatorsByFavorite), legislatorsByFavoriteView);
