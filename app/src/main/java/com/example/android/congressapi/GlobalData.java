@@ -310,7 +310,12 @@ public class GlobalData {
         } catch (final JSONException e) {
             Log.i("error", e.toString());
         }
-
+        Arrays.sort(legislators, new Comparator<Legislator>() {
+            @Override
+            public int compare(Legislator lhs, Legislator rhs) {
+                return lhs.last_name.compareTo(rhs.last_name);
+            }
+        });
         Arrays.sort(legislators, new Comparator<Legislator>() {
             @Override
             public int compare(Legislator lhs, Legislator rhs) {
