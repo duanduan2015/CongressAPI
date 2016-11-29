@@ -30,6 +30,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -161,31 +162,48 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 facebook.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://m.facebook.com/" + GlobalData.legislatorForDetails.facebook_id;
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
+                        if (GlobalData.legislatorForDetails.facebook_id.equals("None")) {
+                            String message = "Sorry, this legislator does not have a facebook account";
+                            Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+                            String url = "https://m.facebook.com/" + GlobalData.legislatorForDetails.facebook_id;
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);
+                        }
                     }
                 });
                 ImageView twitter = (ImageView) content_view.findViewById(R.id.twitter);
                 twitter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://mobile.twitter.com/" + GlobalData.legislatorForDetails.twitter_id;
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
+                        if (GlobalData.legislatorForDetails.twitter_id.equals("None")) {
+                            String message = "Sorry, this legislator does not have a twitter account";
+                            Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+                            String url = "https://mobile.twitter.com/" + GlobalData.legislatorForDetails.twitter_id;
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);
+                        }
                     }
                 });
                 ImageView world = (ImageView) content_view.findViewById(R.id.world);
                 world.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = GlobalData.legislatorForDetails.website;
-                        //Log.i("url", url);
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
+                        if (GlobalData.legislatorForDetails.website.equals("None")) {
+                            String message = "Sorry, this legislator does not have a website";
+                            Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+                            String url = GlobalData.legislatorForDetails.website;
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);
+                        }
                     }
                 });
                 views.addView(content_view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -194,12 +212,9 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         super.onBackPressed();
         return true;
     }

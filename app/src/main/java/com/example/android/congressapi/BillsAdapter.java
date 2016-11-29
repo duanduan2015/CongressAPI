@@ -83,16 +83,16 @@ public class BillsAdapter extends BaseAdapter{
         holder.id.setTypeface(null, Typeface.BOLD);
 
         holder.title.setText(title[position]);
-        holder.title.setTextColor(Color.GRAY);
-        holder.title.setTextSize(13);
+        holder.title.setTextColor(Color.DKGRAY);
+        holder.title.setTextSize(14);
 
         holder.date.setText(date[position]);
-        holder.date.setTextColor(Color.GRAY);
-        holder.date.setTextSize(13);
+        holder.date.setTextColor(Color.DKGRAY);
+        holder.date.setTextSize(14);
 
         holder.button = (ImageButton) rowView.findViewById(R.id.bills_details_button);
 
-        holder.button.setOnClickListener(new OnClickListener()
+        rowView.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View v)

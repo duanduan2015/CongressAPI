@@ -10,38 +10,39 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_marginLeft="130dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp">
 
         <ImageButton android:id="@+id/favorite"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#00ffffff"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center"
             android:onClick="toggleFavoriteLegislator"/>
 
         <ImageView android:id="@+id/facebook"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/facebook"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/facebook"
             android:background="#00ffffff"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center"
             android:onClick="goToFacebook"/>
 
         <ImageView android:id="@+id/twitter"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/twitter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/twitter"
             android:background="#00ffffff"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center"
             android:onClick="goToTwitter"/>
 
         <ImageView android:id="@+id/world"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/world"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/website"
             android:background="#00ffffff"
             android:layout_gravity="center"
             android:onClick="goToWorld"/>

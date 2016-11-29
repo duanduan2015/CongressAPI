@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -83,16 +84,16 @@ public class CommitteesAdapter extends BaseAdapter{
         holder.id.setTypeface(null, Typeface.BOLD);
 
         holder.name.setText(name[position]);
-        holder.name.setTextColor(Color.GRAY);
-        holder.name.setTextSize(13);
+        holder.name.setTextColor(Color.DKGRAY);
+        holder.name.setTextSize(14);
 
         holder.chamber.setText(chamber[position]);
-        holder.chamber.setTextColor(Color.GRAY);
-        holder.chamber.setTextSize(13);
+        holder.chamber.setTextColor(Color.DKGRAY);
+        holder.chamber.setTextSize(14);
 
         holder.button = (ImageButton) rowView.findViewById(R.id.committees_details_button);
 
-        holder.button.setOnClickListener(new OnClickListener()
+        rowView.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View v)

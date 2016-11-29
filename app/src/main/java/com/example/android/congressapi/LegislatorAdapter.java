@@ -87,11 +87,11 @@ public class LegislatorAdapter extends BaseAdapter{
         holder.name.setTypeface(null, Typeface.BOLD);
 
         holder.label.setText(labels[position]);
-        holder.label.setTextColor(Color.GRAY);
-        holder.label.setTextSize(15);
+        holder.label.setTextColor(Color.DKGRAY);
+        holder.label.setTextSize(14);
 
         holder.button = (ImageButton) rowView.findViewById(R.id.details_button);
-        holder.button.setOnClickListener(new OnClickListener()
+        rowView.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View v)

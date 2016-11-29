@@ -90,7 +90,7 @@ public class DisplayCommitteesDetails extends AppCompatActivity {
                 ImageView logo = (ImageView) findViewById(R.id.committeesTable_chamberLogo);
                 TextView chamber = (TextView) findViewById(R.id.committeesTable_chamber);
                 if (c.chamber.equals("House")) {
-                    logo.setBackgroundResource(R.mipmap.house);
+                    logo.setBackgroundResource(R.drawable.house);
                     chamber.setText("House");
                 } else {
                     logo.setImageResource(R.drawable.senate);

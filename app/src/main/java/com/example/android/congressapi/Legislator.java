@@ -15,7 +15,7 @@ import java.util.Date;
 public class Legislator {
     public JSONObject jsonData;
      public String bioguide_id;
-     public String govtrack_id;
+     //public String govtrack_id;
      public String first_name;
      public String last_name;
      public String birthday;
@@ -45,7 +45,7 @@ public class Legislator {
     public void populateLegislator() {
         try {
             bioguide_id = jsonData.getString("bioguide_id");
-            govtrack_id = jsonData.getString("govtrack_id");
+            //govtrack_id = jsonData.getString("govtrack_id");
             first_name = jsonData.getString("first_name");
             last_name = jsonData.getString("last_name");
             birthday = jsonData.getString("birthday");
@@ -56,14 +56,46 @@ public class Legislator {
             party = jsonData.getString("party");
             title = jsonData.getString("title");
             chamber = jsonData.getString("chamber");
-            phone = jsonData.getString("phone");
-            fax = jsonData.getString("fax");
-            website = jsonData.getString("website");
-            office = jsonData.getString("office");
-            district = jsonData.getString("district");
-            oc_email = jsonData.getString("oc_email");
-            twitter_id = jsonData.getString("twitter_id");
-            facebook_id = jsonData.getString("facebook_id");
+            if (!jsonData.has("phone") || jsonData.isNull("phone")) {
+                phone = "None";
+            } else {
+                phone = jsonData.getString("phone");
+            }
+            if (!jsonData.has("fax") || jsonData.isNull("fax")) {
+                fax = "None";
+            } else {
+                fax = jsonData.getString("fax");
+            }
+            if (!jsonData.has("website") || jsonData.isNull("website")) {
+                website = "None";
+            } else {
+                website = jsonData.getString("website");
+            }
+            if (!jsonData.has("office") || jsonData.isNull("office")) {
+                office = "None";
+            } else {
+                office = jsonData.getString("office");
+            }
+            if (!jsonData.has("district") || jsonData.isNull("district")) {
+                district = "None";
+            } else {
+                district = jsonData.getString("district");
+            }
+            if (!jsonData.has("oc_email") || jsonData.isNull("oc_email")) {
+                oc_email = "None";
+            } else {
+                oc_email = jsonData.getString("oc_email");
+            }
+            if (!jsonData.has("twitter_id") || jsonData.isNull("twitter_id")) {
+                twitter_id = "None";
+            } else {
+                twitter_id = jsonData.getString("twitter_id");
+            }
+            if (!jsonData.has("facebook_id") || jsonData.isNull("facebook_id")) {
+                facebook_id = "None";
+            } else {
+                facebook_id = jsonData.getString("facebook_id");
+            }
         } catch (JSONException e) {
             Log.e("error", e.toString());
         }

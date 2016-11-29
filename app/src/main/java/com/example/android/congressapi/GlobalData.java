@@ -130,6 +130,12 @@ public class GlobalData {
                 numOfFavorites++;
             }
         }
+        Arrays.sort(favoriteCommittees, new Comparator<Committee>() {
+            @Override
+            public int compare(Committee lhs, Committee rhs) {
+                return lhs.committee_name.compareTo(rhs.committee_name);
+            }
+        });
     }
     public static String[] getCommitteesId(Committee[] committees) {
         if (committees == null) {
@@ -232,6 +238,12 @@ public class GlobalData {
                 numOfFavorites++;
             }
         }
+        Arrays.sort(favoriteBills, new Comparator<Bill>() {
+            @Override
+            public int compare(Bill lhs, Bill rhs) {
+                return rhs.introduced_date.compareTo(lhs.introduced_date);
+            }
+        });
     }
     public static String[] getBillsId(Bill[] bills) {
         if (bills == null) {
@@ -337,6 +349,12 @@ public class GlobalData {
                 numOfFavorites++;
             }
         }
+        Arrays.sort(legislatorsByFavorite, new Comparator<Legislator>() {
+            @Override
+            public int compare(Legislator lhs, Legislator rhs) {
+                return lhs.last_name.compareTo(rhs.last_name);
+            }
+        });
     }
     public static String[] getLabels(Legislator[] legislators) {
         if (legislators == null) {
