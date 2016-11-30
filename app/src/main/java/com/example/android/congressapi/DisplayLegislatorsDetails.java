@@ -108,6 +108,16 @@ public class DisplayLegislatorsDetails extends AppCompatActivity {
                 TextView emailRow = (TextView) content_view.findViewById(R.id.legislatorTable_email);
                 String email = l.oc_email;
                 emailRow.setText(email);
+                emailRow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TextView view = (TextView) v;
+                        String email_address = view.getText().toString();
+                        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                "mailto", email_address,  null));
+                        startActivity(Intent.createChooser(intent, "Choose an Email client :"));
+                    }
+                });
                 TextView chamberRow = (TextView) content_view.findViewById(R.id.legislatorTable_chamber);
                 String chamber = l.chamber.substring(0,1).toUpperCase() + l.chamber.substring(1).toLowerCase();
                 chamberRow.setText(chamber);
