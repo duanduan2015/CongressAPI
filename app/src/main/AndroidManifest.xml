@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".DisplayLegislatorsDetails"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".DisplayBillsDetails"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
