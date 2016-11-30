@@ -68,8 +68,8 @@
                 </TableRow>
                 <TableRow
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="15dp">
                     <TextView
                         android:layout_gravity="left"
@@ -91,8 +91,8 @@
                 <TableRow
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="left"
                         android:layout_width="0dp"
@@ -114,8 +114,8 @@
                 <TableRow
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="left"
                         android:layout_width="0dp"
@@ -137,8 +137,8 @@
                 <TableRow
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="left"
                         android:layout_width="0dp"
@@ -169,8 +169,8 @@
                 <TableRow
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="left"
                         android:layout_width="0dp"
@@ -192,8 +192,8 @@
                 <TableRow
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="left"
                         android:layout_width="0dp"
@@ -215,8 +215,8 @@
                 <TableRow
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="left"
                         android:layout_width="0dp"
@@ -238,8 +238,8 @@
                 <TableRow
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="left"
                         android:layout_width="0dp"
@@ -261,8 +261,8 @@
                 <TableRow
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="left"
                         android:layout_width="0dp"
