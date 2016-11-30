@@ -1,8 +1,10 @@
 package com.example.android.congressapi;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -52,7 +55,12 @@ public class DisplayBillsDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("Bills Info");
+        setTitle("Bill Info");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
+        }
         //Intent intent = getIntent();
         new PopulateTable().execute();
         //addTableRows();
@@ -87,16 +95,46 @@ public class DisplayBillsDetails extends AppCompatActivity {
                 sponsor.setText(b.sponsorName);
                 TextView chamber = (TextView) findViewById(R.id.billsTable_chamber);
                 chamber.setText(b.chamber);
+                ImageView logo = (ImageView) findViewById(R.id.billsTable_chamberLogo);
+                if (b.chamber.equals("House")) {
+                    logo.setBackgroundResource(R.drawable.house);
+                    chamber.setText("House");
+                } else {
+                    logo.setImageResource(R.drawable.senate);
+                    chamber.setText("Senate");
+                }
                 TextView status = (TextView) findViewById(R.id.billsTable_status);
                 status.setText(b.status);
                 TextView introduced = (TextView) findViewById(R.id.billsTable_introduced);
                 introduced.setText(b.introduced_on_date);
                 TextView congress = (TextView) findViewById(R.id.billsTable_congress);
                 congress.setText(b.congress);
+                if (!b.congress.equals("None")) {
+                    congress.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            TextView view = (TextView) v;
+                            String url = view.getText().toString();
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);
+                        }
+                    });
+                }
                 TextView version = (TextView) findViewById(R.id.billsTable_version_status);
                 version.setText(b.version_name);
                 TextView pdf = (TextView) findViewById(R.id.billsTable_pdf);
                 pdf.setText(b.pdf);
+                pdf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TextView view = (TextView) v;
+                        String url = "http://docs.google.com/gview?embedded=true&url=" + view.getText().toString();
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                });
                 ImageButton favorite = (ImageButton) findViewById(R.id.favorite_bills);
                 if (b.favorite) {
                     favorite.setBackgroundResource(R.drawable.star_pressed);

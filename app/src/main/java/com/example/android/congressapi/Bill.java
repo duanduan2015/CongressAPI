@@ -42,7 +42,11 @@ public class Bill {
             bill_id = jsonData.getString("bill_id").toUpperCase();
             official_title = jsonData.getString("official_title");
             introduced_on = jsonData.getString("introduced_on");
-            short_title = jsonData.getString("short_title");
+            if (!jsonData.has("short_title") || jsonData.isNull("short_title")) {
+                short_title = "None";
+            } else {
+                short_title = jsonData.getString("short_title");
+            }
             sponsor_first_name = jsonData.getJSONObject("sponsor").getString("first_name");
             sponsor_last_name = jsonData.getJSONObject("sponsor").getString("last_name");
             sponsor_title = jsonData.getJSONObject("sponsor").getString("title");
@@ -55,13 +59,25 @@ public class Bill {
             } else {
                 status = "New";
             }
-            congress = jsonData.getJSONObject("urls").getString("congress");
-            version_name = jsonData.getJSONObject("last_version").getString("version_name");
+            if (!jsonData.has("urls") || jsonData.isNull("urls")
+                    || !jsonData.getJSONObject("urls").has("congress")
+                    || jsonData.getJSONObject("urls").isNull("congress")) {
+                congress = "None";
+            } else {
+                congress = jsonData.getJSONObject("urls").getString("congress");
+            }
+            if (!jsonData.has("last_version") || jsonData.isNull("last_version")
+                    || !jsonData.getJSONObject("last_version").has("version_name")
+                    || jsonData.getJSONObject("last_version").isNull("version_name")) {
+                version_name = "None";
+            } else {
+                version_name = jsonData.getJSONObject("last_version").getString("version_name");
+            }
             pdf = jsonData.getJSONObject("last_version").getJSONObject("urls").getString("pdf");
         } catch (JSONException e) {
             Log.e("error", e.toString());
         }
-        if (short_title.equals("null")) {
+        if (short_title.equals("None")) {
             label_title = official_title;
             //Log.i("official_title", label_title);
         } else {

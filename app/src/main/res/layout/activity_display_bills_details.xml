@@ -42,24 +42,27 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:shrinkColumns="1">
                 <TableRow
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="15dp">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:text="Bill ID:"
                         android:textColor="#190707"
                         android:textStyle="bold"
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_id"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
@@ -70,16 +73,18 @@
                     android:layout_marginBottom="15dp">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:text="Title:"
                         android:textColor="#190707"
                         android:textStyle="bold"
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_title"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
@@ -90,7 +95,9 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:text="Bill Type:"
                         android:textColor="#190707"
@@ -98,9 +105,9 @@
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_type"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
@@ -111,7 +118,9 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:text="Sponsor:"
                         android:textColor="#190707"
@@ -119,9 +128,9 @@
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_sponsor"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
@@ -132,19 +141,30 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:text="Chamber:"
                         android:textColor="#190707"
                         android:textStyle="bold"
                         android:textSize="15dp"/>
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textAlignment="textEnd">
+                    <ImageView
+                        android:id="@+id/billsTable_chamberLogo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0dp" />
                     <TextView
                         android:id="@+id/billsTable_chamber"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:gravity="end"
-                        android:textAlignment="textEnd"/>
+                        android:layout_width="wrap_content"/>
+                    </LinearLayout>
                 </TableRow>
                 <TableRow
                     android:layout_gravity="center"
@@ -153,7 +173,9 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:text="Status:"
                         android:textColor="#190707"
@@ -161,9 +183,9 @@
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_status"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
@@ -174,7 +196,9 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:text="Introduced On:"
                         android:textColor="#190707"
@@ -182,9 +206,9 @@
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_introduced"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
@@ -195,7 +219,9 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:text="Congress URL:"
                         android:textColor="#190707"
@@ -203,9 +229,9 @@
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_congress"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
@@ -216,7 +242,9 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:text="Version Status:"
                         android:textColor="#190707"
@@ -224,9 +252,9 @@
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_version_status"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
@@ -237,7 +265,9 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:text="Bill URL:"
                         android:textColor="#190707"
@@ -245,9 +275,9 @@
                         android:textSize="15dp"/>
                     <TextView
                         android:id="@+id/billsTable_pdf"
-                        android:paddingRight="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:gravity="end"
                         android:textAlignment="textEnd"/>
                 </TableRow>
