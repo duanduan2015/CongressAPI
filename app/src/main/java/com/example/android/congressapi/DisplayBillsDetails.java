@@ -88,7 +88,7 @@ public class DisplayBillsDetails extends AppCompatActivity {
                 TextView bill_id = (TextView) findViewById(R.id.billsTable_id);
                 bill_id.setText(b.bill_id);
                 TextView bill_title = (TextView) findViewById(R.id.billsTable_title);
-                bill_title.setText(b.official_title);
+                bill_title.setText(b.label_title);
                 TextView bill_type = (TextView) findViewById(R.id.billsTable_type);
                 bill_type.setText(b.bill_type);
                 TextView sponsor = (TextView) findViewById(R.id.billsTable_sponsor);
