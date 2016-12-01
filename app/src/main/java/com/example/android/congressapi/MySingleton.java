@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley;
 import android.util.LruCache;
 /**
  * Created by duanduan on 11/22/16.
+ * This class is from https://developer.android.com/training/volley/requestqueue.html
  */
 public class MySingleton {
     private static MySingleton mInstance;
